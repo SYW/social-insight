@@ -23,7 +23,7 @@ namespace SocialInsight.Web.UI.Controllers
 					    _platformSettings.SywWebSiteUrl + String.Format(_platformSettings.SywAppLoginUrl, _applicationSettings.AppId)
 			    };
 
-	        return View(model);
+			return View("~/Views/Landing.cshtml", model);
         }
     }
 

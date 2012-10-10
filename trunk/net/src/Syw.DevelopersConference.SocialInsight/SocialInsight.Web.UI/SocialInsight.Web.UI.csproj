@@ -122,13 +122,13 @@
     <Content Include="static\js\MicrosoftMvcValidation.js" />
     <Content Include="static\js\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Landing\Index.cshtml" />
+    <Content Include="Views\Landing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
