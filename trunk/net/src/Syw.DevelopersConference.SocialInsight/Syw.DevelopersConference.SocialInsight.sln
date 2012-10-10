@@ -1,7 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialInsight.Domain", "SocialInsight.Domain\SocialInsight.Domain.csproj", "{8A8E295D-4C17-422B-B2B1-E538C2651D00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialInsight.Web.UI", "SocialInsight.Web.UI\SocialInsight.Web.UI.csproj", "{D49F7E26-A09B-4AF1-B01B-99B6D778EE23}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A8E295D-4C17-422B-B2B1-E538C2651D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8E295D-4C17-422B-B2B1-E538C2651D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8E295D-4C17-422B-B2B1-E538C2651D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8E295D-4C17-422B-B2B1-E538C2651D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49F7E26-A09B-4AF1-B01B-99B6D778EE23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49F7E26-A09B-4AF1-B01B-99B6D778EE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49F7E26-A09B-4AF1-B01B-99B6D778EE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49F7E26-A09B-4AF1-B01B-99B6D778EE23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
