@@ -20,7 +20,7 @@ namespace SocialInsight.Web.UI
 			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
-				new { controller = "Home", action = "Dashboard", id = UrlParameter.Optional } // Parameter defaults
+				new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional } // Parameter defaults
 			);
 
 		}

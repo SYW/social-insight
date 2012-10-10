@@ -2,9 +2,9 @@
 
 namespace SocialInsight.Web.UI.Controllers
 {
-	public class HomeController : Controller
+	public class DashboardController : Controller
 	{
-		public ActionResult Dashboard()
+		public ActionResult Index()
 		{
 			return View();
 		}
