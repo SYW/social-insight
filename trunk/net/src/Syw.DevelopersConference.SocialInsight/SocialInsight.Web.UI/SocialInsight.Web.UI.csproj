@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -129,6 +130,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Landing.cshtml" />
+    <Content Include="Views\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
