@@ -17,6 +17,13 @@ namespace SocialInsight.Web.UI
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			// Post login is special. In an commercial application you'll need to use attributes and reflections to avoid this. For this example, this will be fine for now 
+			routes.MapRoute(
+				"PostLogin",
+				"post-login",
+				new { controller = "PostLogin", action = "Index" }
+			);
+
 			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters

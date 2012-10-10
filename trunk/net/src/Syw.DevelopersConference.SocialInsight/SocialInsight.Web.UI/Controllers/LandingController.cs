@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Web.Mvc;
+using SocialInsight.Domain;
 using SocialInsight.Domain.Configuration;
 
 namespace SocialInsight.Web.UI.Controllers
 {
     public class LandingController : Controller
     {
-	    private PlatformSettings _platformSettings;
-	    private ApplicationSettings _applicationSettings;
+	    private readonly Routes _routes;
 
 	    public LandingController()
 	    {
-		    _platformSettings = new PlatformSettings();
-		    _applicationSettings = new ApplicationSettings();
+		    _routes = new Routes();
 	    }
 
 	    public ActionResult Index()
 	    {
 		    var model = new LandingModel
 			    {
-				    AppLoginUrl =
-					    _platformSettings.SywWebSiteUrl + String.Format(_platformSettings.SywAppLoginUrl, _applicationSettings.AppId)
+				    AppLoginUrl = _routes.Login()
 			    };
 
 			return View("~/Views/Landing.cshtml", model);
