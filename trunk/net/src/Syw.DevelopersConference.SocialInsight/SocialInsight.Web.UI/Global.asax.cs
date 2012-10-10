@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using SocialInsight.Web.UI.Filters;
 
 namespace SocialInsight.Web.UI
 {
@@ -11,6 +12,7 @@ namespace SocialInsight.Web.UI
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
+			filters.Add(new TokenExtractingFilter());
 		}
 
 		public static void RegisterRoutes(RouteCollection routes)
