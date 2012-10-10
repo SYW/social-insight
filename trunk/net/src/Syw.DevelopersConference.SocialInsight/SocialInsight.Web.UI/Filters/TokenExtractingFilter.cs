@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using SocialInsight.Domain.Context;
+using SocialInsight.Domain.Platform;
 
 namespace SocialInsight.Web.UI.Filters
 {

@@ -38,12 +38,14 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ArrayExtensions.cs" />
     <Compile Include="Configuration\ApplicationSettings.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\PlatformSettings.cs" />
     <Compile Include="Context\HttpContextProvider.cs" />
     <Compile Include="Context\IContextProvider.cs" />
-    <Compile Include="Context\PlatformToken.cs" />
+    <Compile Include="Platform\PlatformToken.cs" />
+    <Compile Include="Platform\PlatformHashProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
