@@ -46,10 +46,10 @@
     <Compile Include="Configuration\PlatformSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="Users\UserDto.cs" />
+    <Compile Include="Users\UsersApi.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Platform\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Platform.Client\Platform.Client.csproj">
       <Project>{28e8afb6-d3d4-4ef5-a449-9f1429c84bed}</Project>
