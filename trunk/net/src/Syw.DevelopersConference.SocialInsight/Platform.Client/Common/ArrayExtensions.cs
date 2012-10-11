@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace SocialInsight.Domain.Common
+namespace Platform.Client.Common
 {
 	public static class ArrayExtensions
 	{

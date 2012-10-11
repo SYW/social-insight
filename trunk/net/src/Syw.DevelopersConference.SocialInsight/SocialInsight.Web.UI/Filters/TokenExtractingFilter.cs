@@ -1,16 +1,16 @@
 ﻿using System.Web.Mvc;
-using SocialInsight.Domain.Context;
-using SocialInsight.Domain.Platform;
+using Platform.Client;
+using Platform.Client.Common.Context;
 
 namespace SocialInsight.Web.UI.Filters
 {
 	public class TokenExtractingFilter : ActionFilterAttribute
 	{
-		private readonly PlatformToken _platformToken;
+		private readonly IPlatformTokenProvider _platformToken;
 
 		public TokenExtractingFilter()
 		{
-			_platformToken = new PlatformToken(new HttpContextProvider());
+			_platformToken = new PlatformTokenProvider(new HttpContextProvider());
 		}
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext)

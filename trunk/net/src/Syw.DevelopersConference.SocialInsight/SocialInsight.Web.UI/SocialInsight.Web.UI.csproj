@@ -143,6 +143,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Platform.Client\Platform.Client.csproj">
+      <Project>{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}</Project>
+      <Name>Platform.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SocialInsight.Domain\SocialInsight.Domain.csproj">
       <Project>{8a8e295d-4c17-422b-b2b1-e538c2651d00}</Project>
       <Name>SocialInsight.Domain</Name>

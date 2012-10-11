@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace SocialInsight.Domain.Context
+namespace Platform.Client.Common.Context
 {
 	public class HttpContextProvider : IContextProvider
 	{

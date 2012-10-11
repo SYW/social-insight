@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A8E295D-4C17-422B-B2B1-E538C2651D00}</ProjectGuid>
+    <ProjectGuid>{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SocialInsight.Domain</RootNamespace>
-    <AssemblyName>SocialInsight.Domain</AssemblyName>
+    <RootNamespace>Platform.Client</RootNamespace>
+    <AssemblyName>Platform.Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,26 +34,24 @@
       <HintPath>..\..\..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ApplicationSettings.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\PlatformSettings.cs" />
+    <Compile Include="Common\ArrayExtensions.cs" />
+    <Compile Include="Common\Context\HttpContextProvider.cs" />
+    <Compile Include="Common\Context\IContextProvider.cs" />
+    <Compile Include="Common\WebClient\IWebClient.cs" />
+    <Compile Include="Configuration\IApplicationSettings.cs" />
+    <Compile Include="Configuration\IPlatformSettings.cs" />
+    <Compile Include="PlatformHashProvider.cs" />
+    <Compile Include="PlatformTokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routes.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Platform\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Platform.Client\Platform.Client.csproj">
-      <Project>{28e8afb6-d3d4-4ef5-a449-9f1429c84bed}</Project>
-      <Name>Platform.Client</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

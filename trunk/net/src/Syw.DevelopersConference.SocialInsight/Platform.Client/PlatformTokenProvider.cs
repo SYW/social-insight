@@ -1,13 +1,19 @@
-﻿using SocialInsight.Domain.Context;
+﻿using Platform.Client.Common.Context;
 
-namespace SocialInsight.Domain.Platform
+namespace Platform.Client
 {
-	public class PlatformToken
+	public interface IPlatformTokenProvider
+	{
+		void Set(string token);
+		string Get();
+	}
+
+	public class PlatformTokenProvider : IPlatformTokenProvider
 	{
 		private const string TokenKey = "token";
 		private readonly IContextProvider _contextProvider;
 
-		public PlatformToken(IContextProvider contextProvider)
+		public PlatformTokenProvider(IContextProvider contextProvider)
 		{
 			_contextProvider = contextProvider;
 		}

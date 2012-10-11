@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace SocialInsight.Domain.Common.WebClient
+namespace Platform.Client.Common.WebClient
 {
 	public interface IWebClient
 	{
@@ -122,7 +122,7 @@ namespace SocialInsight.Domain.Common.WebClient
 			using (var reader = new StreamReader(response.GetResponseStream(), Encoding))
 			{
 				return reader.ReadToEnd();
-			}
+			}	
 		}
 
 		private WebRequest GetWebRequest(Uri url)
