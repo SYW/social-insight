@@ -5,7 +5,12 @@ using Platform.Client.Configuration;
 
 namespace Platform.Client
 {
-	public class PlatformHashProvider
+	public interface IPlatformHashProvider
+	{
+		string GetHash();
+	}
+
+	public class PlatformHashProvider : IPlatformHashProvider
 	{
 		private readonly SHA256 _hashAlgorithm;
 		private readonly IApplicationSettings _applicationSettings;

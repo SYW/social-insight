@@ -26,5 +26,18 @@ namespace SocialInsight.Domain.Configuration
 
 			return val;
 		}
+
+		public static Uri GetUri(string key)
+		{
+			var val = GetString(key);
+
+			Uri result;
+
+			if (!Uri.TryCreate(val, UriKind.Absolute, out result))
+				throw new ConfigurationErrorsException(
+					String.Format("Value of key '{0}' is not a valid URI: '{1}'", key, val));
+
+			return result;
+		}
 	}
 }

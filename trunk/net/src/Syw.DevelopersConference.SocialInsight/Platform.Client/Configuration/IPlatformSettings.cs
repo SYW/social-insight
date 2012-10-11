@@ -7,5 +7,6 @@ namespace Platform.Client.Configuration
 		string SywWebSiteUrl { get; }
 		string SywAppLoginUrl { get; }
 		Uri ApiUrl { get; }
+		Uri SecureApiUrl { get;  }
 	}
 }

@@ -46,10 +46,13 @@
     <Compile Include="Common\ArrayExtensions.cs" />
     <Compile Include="Common\Context\HttpContextProvider.cs" />
     <Compile Include="Common\Context\IContextProvider.cs" />
+    <Compile Include="Common\ParametersTranslator.cs" />
     <Compile Include="Common\WebClient\IWebClient.cs" />
+    <Compile Include="Common\WebClient\IWebClientBuilder.cs" />
     <Compile Include="Configuration\IApplicationSettings.cs" />
     <Compile Include="Configuration\IPlatformSettings.cs" />
     <Compile Include="PlatformHashProvider.cs" />
+    <Compile Include="PlatformProxy.cs" />
     <Compile Include="PlatformTokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
