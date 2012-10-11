@@ -3,7 +3,13 @@ using SocialInsight.Domain.DataAccess;
 
 namespace SocialInsight.Domain.Catalogs
 {
-	public class CatalogsRepository
+	public interface ICatalogsRepository
+	{
+		void AddUserCatalog(long userId, long catalogId);
+		long? GetUserCatalog(long userId);
+	}
+
+	public class CatalogsRepository : ICatalogsRepository
 	{
 		private readonly SessionProvider _sessionProvider;
 

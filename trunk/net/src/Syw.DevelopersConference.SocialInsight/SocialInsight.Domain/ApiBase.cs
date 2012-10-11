@@ -1,4 +1,5 @@
-﻿using Platform.Client;
+﻿using System.Collections.Generic;
+using Platform.Client;
 using Platform.Client.Common.Context;
 using SocialInsight.Domain.Configuration;
 
@@ -20,6 +21,11 @@ namespace SocialInsight.Domain
 		protected string GetEndpointPath(string endpoint)
 		{
 			return string.Format("/{0}/{1}", BasePath, endpoint);
+		}
+
+		protected T Call<T>(string endpoint, params KeyValuePair<string, object>[] parameters)
+		{
+			return Proxy.Get<T>(GetEndpointPath(endpoint), parameters);
 		}
 	}
 }

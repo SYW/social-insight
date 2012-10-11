@@ -1,5 +1,25 @@
-﻿@{
+﻿@model SocialInsight.Web.UI.Controllers.DashboardModel
+
+@{
     ViewBag.Title = "Dashboard";
 }
 
 <h2>Dashboard</h2>
+
+<div class="dashboard">
+	@if (Model.Products.Any())
+	{
+	    foreach(var product in Model.Products)
+	    {
+		    <div class="scored-product">
+			    <a href="@product.ProductUrl" class="product-image" target="_top"><img alt="@product.Name" src="@product.ImageUrl"/></a>
+			    <a href="@product.ProductUrl" class="product-name" target="_top">@product.Name</a>
+			    <div class="product-score">Score: <span>@product.Score</span></div>
+		    </div>
+	    }	
+	}
+    else
+	{
+		<div class="no-products">There are no products to get insight about. To start getting insight about products you want, add products to the <span class="app-name">Social Insight</span> catalog</div>
+	}
+</div> 

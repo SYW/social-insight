@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ArrayExtensions.cs" />
+    <Compile Include="Common\Context\CookieContextProvider.cs" />
     <Compile Include="Common\Context\HttpContextProvider.cs" />
     <Compile Include="Common\Context\IContextProvider.cs" />
     <Compile Include="Common\ParametersTranslator.cs" />

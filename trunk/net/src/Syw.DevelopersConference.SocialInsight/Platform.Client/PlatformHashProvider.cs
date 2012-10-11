@@ -12,14 +12,13 @@ namespace Platform.Client
 
 	public class PlatformHashProvider : IPlatformHashProvider
 	{
-		private readonly SHA256 _hashAlgorithm;
+		private static readonly SHA256 HashAlgorithm = SHA256.Create();
 		private readonly IApplicationSettings _applicationSettings;
 		private readonly IPlatformTokenProvider _platfromTokenProvider;
 
 		public PlatformHashProvider(IApplicationSettings applicationSettings,
 			IPlatformTokenProvider platformTokenProvider)
 		{
-			_hashAlgorithm = SHA256.Create();
 			_applicationSettings = applicationSettings;
 			_platfromTokenProvider = platformTokenProvider;
 		}
@@ -28,7 +27,7 @@ namespace Platform.Client
 		{
 			var saltedWithSecret = Encoding.UTF8.GetBytes(_platfromTokenProvider.Get() + _applicationSettings.AppSecret);
 
-			return _hashAlgorithm.ComputeHash(saltedWithSecret).ToHexString().ToLower();
+			return HashAlgorithm.ComputeHash(saltedWithSecret).ToHexString().ToLower();
 		}
 	}
 }

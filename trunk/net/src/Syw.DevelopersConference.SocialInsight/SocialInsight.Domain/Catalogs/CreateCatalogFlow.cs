@@ -1,4 +1,4 @@
-﻿using SocialInsight.Domain.Users;
+﻿using SocialInsight.Domain.Context;
 
 namespace SocialInsight.Domain.Catalogs
 {
@@ -9,20 +9,20 @@ namespace SocialInsight.Domain.Catalogs
 
 	public class CreateCatalogFlow : ICreateCatalogFlow
 	{
-		private readonly CatalogsApi _catalogsApi;
-		private readonly IUsersApi _usersApi;
 		private readonly CatalogsRepository _catalogsRepository;
+		private readonly IUserContextProvider _userContextProvider;
+		private readonly CatalogsApi _catalogsApi;
 
 		public CreateCatalogFlow()
 		{
 			_catalogsApi = new CatalogsApi();
-			_usersApi = new UsersApi();
+			_userContextProvider = new UserContextProvider();
 			_catalogsRepository = new CatalogsRepository();
 		}
 
 		public void Create()
 		{
-			var currentUserId = _usersApi.GetCurrentUser().Id;
+			var currentUserId = _userContextProvider.GetUserId();
 
 			var userCatalog = _catalogsRepository.GetUserCatalog(currentUserId);
 
