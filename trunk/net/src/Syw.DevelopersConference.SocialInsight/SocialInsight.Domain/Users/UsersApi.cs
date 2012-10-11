@@ -1,6 +1,4 @@
-﻿using Platform.Client;
-using Platform.Client.Common.Context;
-using SocialInsight.Domain.Configuration;
+﻿using Platform.Client.Common.Context;
 
 namespace SocialInsight.Domain.Users
 {
@@ -11,11 +9,28 @@ namespace SocialInsight.Domain.Users
 
 	public class UsersApi : ApiBase, IUsersApi
 	{
+		private const string CurrentUserCacheKey = "users:current";
+
+		private readonly HttpContextProvider _context;
+
 		protected override string BasePath { get { return "users"; } }
+
+		public UsersApi()
+		{
+			_context = new HttpContextProvider();
+		}
 
 		public UserDto GetCurrentUser()
 		{
-			return Proxy.Get<UserDto>(GetEndpointPath("current"));
+			var user = _context.Get<UserDto>(CurrentUserCacheKey);
+
+			if (user == null)
+			{
+				user = Proxy.Get<UserDto>(GetEndpointPath("current"));
+				_context.Set(CurrentUserCacheKey, user);
+			}
+
+			return user;
 		}
 	}
 }

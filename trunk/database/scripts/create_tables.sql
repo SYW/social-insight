@@ -1,0 +1,5 @@
+CREATE TABLE `social_insight`.`user_catalogs` (
+`UserId` BIGINT(20) UNSIGNED NOT NULL,
+`CatalogId` BIGINT(20) UNSIGNED NOT NULL,
+PRIMARY KEY (`UserId`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;

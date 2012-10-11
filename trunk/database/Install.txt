@@ -1,0 +1,5 @@
+Instructions:
+1. Install MySql database the target machine
+2. Create a database called 'social_insight'
+3. Create a user named si_root. Give this user all privileges on the social_insight database
+3. run all the scripts in the scripts folder
