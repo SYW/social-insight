@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 
 namespace SocialInsight.Domain.Catalogs
 {
@@ -16,12 +20,10 @@ namespace SocialInsight.Domain.Catalogs
 
 		public long Create(string catalogName, string description, Privacy privacy)
 		{
-			var catalogId = Call<long>("create",
-										new KeyValuePair<string, object>("name", catalogName),
-										new KeyValuePair<string, object>("description", description),
-										new KeyValuePair<string, object>("privacy", privacy));
-
-			return catalogId;
+			return Call<long>("create",
+								new KeyValuePair<string, object>("name", catalogName),
+								new KeyValuePair<string, object>("description", description),
+								new KeyValuePair<string, object>("privacy", privacy));
 		}
 
 		public IList<CatalogDto> Get(IList<long> ids)

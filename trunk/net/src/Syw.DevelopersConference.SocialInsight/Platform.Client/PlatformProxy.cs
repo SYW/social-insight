@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
 using Platform.Client.Common;
 using Platform.Client.Common.WebClient;
 using Platform.Client.Configuration;
@@ -79,7 +83,37 @@ namespace Platform.Client
 			if (applyExtraParameters != null)
 				applyExtraParameters(serviceParameters);
 
-			return webClient.GetJson<TR>(serviceUrl, serviceParameters);
+			try
+			{
+				return webClient.GetJson<TR>(serviceUrl, serviceParameters);
+			}
+			catch (WebException ex)
+			{
+				throw GeneratePlatformRequestException(ex);
+			}
+		}
+
+		private Exception GeneratePlatformRequestException(WebException ex)
+		{
+			try
+			{
+				var readError = ReadError(ex);
+				var errorDto = JsonConvert.DeserializeObject<RequestExceptionDto>(readError).Error;
+
+				return new RequestException(errorDto.StatusCode, errorDto.Message, errorDto.RequestId, ex);
+			}
+			catch (Exception)
+			{
+				return ex;
+			}
+		}
+
+		private string ReadError(WebException ex)
+		{
+			using (var reader = new StreamReader(ex.Response.GetResponseStream(), Encoding.UTF8))
+			{
+				return reader.ReadToEnd();
+			}	
 		}
 
 		private void AddContextParameters(NameValueCollection serviceParameters)

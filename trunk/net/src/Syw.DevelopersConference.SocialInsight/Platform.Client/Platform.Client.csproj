@@ -50,6 +50,7 @@
     <Compile Include="Common\ParametersTranslator.cs" />
     <Compile Include="Common\WebClient\IWebClient.cs" />
     <Compile Include="Common\WebClient\IWebClientBuilder.cs" />
+    <Compile Include="Common\WebClient\RequestException.cs" />
     <Compile Include="Configuration\IApplicationSettings.cs" />
     <Compile Include="Configuration\IPlatformSettings.cs" />
     <Compile Include="PlatformHashProvider.cs" />
