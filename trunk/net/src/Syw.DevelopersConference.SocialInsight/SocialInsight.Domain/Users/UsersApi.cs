@@ -9,27 +9,13 @@ namespace SocialInsight.Domain.Users
 		UserDto GetCurrentUser();
 	}
 
-	public class UsersApi : IUsersApi
+	public class UsersApi : ApiBase, IUsersApi
 	{
-		private const string BasePath = "users";
-
-		private readonly PlatformProxy _proxy;
-		
-		public UsersApi()
-		{
-			_proxy = new PlatformProxy(new PlatformSettings(),
-			                           new ApplicationSettings(),
-			                           new PlatformTokenProvider(new HttpContextProvider()));
-		}
+		protected override string BasePath { get { return "users"; } }
 
 		public UserDto GetCurrentUser()
 		{
-			return _proxy.Get<UserDto>(GetEndpointPath("current"));
-		}
-
-		private static string GetEndpointPath(string endpoint)
-		{
-			return string.Format("/{0}/{1}", BasePath, endpoint);
+			return Proxy.Get<UserDto>(GetEndpointPath("current"));
 		}
 	}
 }

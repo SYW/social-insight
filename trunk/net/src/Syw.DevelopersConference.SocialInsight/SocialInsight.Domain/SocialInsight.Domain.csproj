@@ -41,6 +41,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBase.cs" />
+    <Compile Include="Auth\AuthApi.cs" />
+    <Compile Include="Auth\UserState.cs" />
     <Compile Include="Configuration\ApplicationSettings.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\PlatformSettings.cs" />
