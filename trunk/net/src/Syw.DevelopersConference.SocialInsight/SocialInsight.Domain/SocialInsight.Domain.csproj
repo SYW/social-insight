@@ -74,6 +74,7 @@
     <Compile Include="ApiBase.cs" />
     <Compile Include="AppLinks\AppLinksApi.cs" />
     <Compile Include="Auth\AuthApi.cs" />
+    <Compile Include="Auth\OfflineTokenProvider.cs" />
     <Compile Include="Auth\UserState.cs" />
     <Compile Include="Catalogs\CatalogDto.cs" />
     <Compile Include="Catalogs\CatalogsApi.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="DataAccess\SessionProvider.cs" />
     <Compile Include="Privacy.cs" />
     <Compile Include="Products\ProductDto.cs" />
+    <Compile Include="Products\ProductInsightDto.cs" />
+    <Compile Include="Products\ProductInsightDtoMap.cs" />
     <Compile Include="Products\ProductsApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes.cs" />

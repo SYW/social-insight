@@ -3,3 +3,10 @@ CREATE TABLE `social_insight`.`user_catalogs` (
 `CatalogId` BIGINT(20) UNSIGNED NOT NULL,
 PRIMARY KEY (`UserId`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `social_insight`.`products_insight` (
+`UserId` BIGINT(20) UNSIGNED NOT NULL,
+`ProductId` BIGINT(20) UNSIGNED NOT NULL,
+`Score` MEDIUMINT(10) UNSIGNED NOT NULL,
+PRIMARY KEY (`UserId`, `ProductId`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;

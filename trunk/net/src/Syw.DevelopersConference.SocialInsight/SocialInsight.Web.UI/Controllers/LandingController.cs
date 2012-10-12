@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Platform.Client.Common.Context;
 using SocialInsight.Domain;
 using SocialInsight.Domain.Auth;
 using SocialInsight.Domain.Users;
@@ -14,7 +15,7 @@ namespace SocialInsight.Web.UI.Controllers
 	    public LandingController()
 	    {
 		    _routes = new Routes();
-		    _authApi = new AuthApi();
+		    _authApi = new AuthApi(new HttpContextProvider());
 		    _usersApi = new UsersApi();
 	    }
 

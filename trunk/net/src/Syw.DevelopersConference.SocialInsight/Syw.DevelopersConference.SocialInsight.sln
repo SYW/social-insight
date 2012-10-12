@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialInsight.Web.UI", "Soc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Client", "Platform.Client\Platform.Client.csproj", "{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialInsight.Engine", "SocialInsight.Engine\SocialInsight.Engine.csproj", "{53A8517E-ADDB-41A0-90AC-3C9B5BF82B7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28E8AFB6-D3D4-4EF5-A449-9F1429C84BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53A8517E-ADDB-41A0-90AC-3C9B5BF82B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A8517E-ADDB-41A0-90AC-3C9B5BF82B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A8517E-ADDB-41A0-90AC-3C9B5BF82B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A8517E-ADDB-41A0-90AC-3C9B5BF82B7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,11 +11,11 @@ namespace SocialInsight.Domain
 
 		protected abstract string BasePath { get; }
 
-		protected ApiBase()
+		protected ApiBase(IContextProvider contextProvider)
 		{
 			Proxy = new PlatformProxy(new PlatformSettings(),
 									   new ApplicationSettings(),
-									   new PlatformTokenProvider(new HttpContextProvider()));
+									   new PlatformTokenProvider(contextProvider));
 		}
 
 		protected string GetEndpointPath(string endpoint)

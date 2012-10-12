@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Platform.Client.Common.Context;
 
 namespace SocialInsight.Domain.Products
 {
@@ -9,6 +10,10 @@ namespace SocialInsight.Domain.Products
 
 	public class ProductsApi : ApiBase, IProductsApi
 	{
+		public ProductsApi() : base(new HttpContextProvider())
+		{
+		}
+
 		protected override string BasePath { get { return "products"; } }
 
 		public IList<ProductDto> Get(IList<long> ids)

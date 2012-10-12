@@ -6,7 +6,6 @@ namespace SocialInsight.Domain.Catalogs
 	{
 		public UserCatalogDtoMap()
 		{
-			ReadOnly();
 			Not.LazyLoad();
 			Table("user_catalogs");
 

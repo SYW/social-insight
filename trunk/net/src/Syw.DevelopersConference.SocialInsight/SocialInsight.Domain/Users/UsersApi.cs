@@ -18,7 +18,7 @@ namespace SocialInsight.Domain.Users
 
 		protected override string BasePath { get { return "users"; } }
 
-		public UsersApi()
+		public UsersApi() : base(new HttpContextProvider())
 		{
 			_context = new HttpContextProvider();			
 		}

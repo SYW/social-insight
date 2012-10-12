@@ -33,33 +33,24 @@ namespace Platform.Client
 
 		public TR Get<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
 		{
-			return Get<TR>(servicePath, parameters, AddContextParameters);
+			return Get<TR>(GetServiceUrl(servicePath), parameters, AddContextParameters);
 		}
 
 		public TR GetWithoutContext<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
 		{
-			return Get<TR>(servicePath, parameters, null);
+			return Get<TR>(GetServiceUrl(servicePath), parameters, null);
 		}
 
-		public string GetOfflineToken(string servicePath, NameValueCollection serviceParameters)
+		public TR SecuredGetWithoutContext<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
 		{
-			var webClient = _webClientBuilder.Create();
-
 			var serviceUrl = GetSecureServiceUrl(servicePath);
 
-			return webClient.GetJson<string>(serviceUrl, serviceParameters);
+			return Get<TR>(serviceUrl, parameters, null);
 		}
 
-		public string Hash
-		{
-			get { return _platformHashProvider.GetHash(); }
-		}
-
-		private TR Get<TR>(string servicePath, ICollection<KeyValuePair<string, object>> parameters, Action<NameValueCollection> applyExtraParameters)
+		private TR Get<TR>(Uri serviceUrl, ICollection<KeyValuePair<string, object>> parameters, Action<NameValueCollection> applyExtraParameters)
 		{
 			var webClient = _webClientBuilder.Create();
-
-			var serviceUrl = GetServiceUrl(servicePath);
 
 			NameValueCollection serviceParameters;
 

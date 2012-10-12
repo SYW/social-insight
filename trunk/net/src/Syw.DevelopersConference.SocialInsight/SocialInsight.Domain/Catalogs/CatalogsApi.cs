@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Platform.Client.Common.Context;
 
 namespace SocialInsight.Domain.Catalogs
 {
@@ -16,6 +17,10 @@ namespace SocialInsight.Domain.Catalogs
 
 	public class CatalogsApi : ApiBase, ICatalogsApi
 	{
+		public CatalogsApi() : base(new HttpContextProvider())
+		{
+		}
+
 		protected override string BasePath { get { return "catalogs"; } }
 
 		public long Create(string catalogName, string description, Privacy privacy)

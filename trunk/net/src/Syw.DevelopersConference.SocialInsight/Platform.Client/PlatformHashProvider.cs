@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using Platform.Client.Common;
+﻿using Platform.Client.Common;
 using Platform.Client.Configuration;
 
 namespace Platform.Client
@@ -12,7 +10,6 @@ namespace Platform.Client
 
 	public class PlatformHashProvider : IPlatformHashProvider
 	{
-		private static readonly SHA256 HashAlgorithm = SHA256.Create();
 		private readonly IApplicationSettings _applicationSettings;
 		private readonly IPlatformTokenProvider _platfromTokenProvider;
 
@@ -25,9 +22,9 @@ namespace Platform.Client
 
 		public string GetHash()
 		{
-			var saltedWithSecret = Encoding.UTF8.GetBytes(_platfromTokenProvider.Get() + _applicationSettings.AppSecret);
-
-			return HashAlgorithm.ComputeHash(saltedWithSecret).ToHexString().ToLower();
+			return new SignatureBuilder()
+				.Append(_platfromTokenProvider.Get() + _applicationSettings.AppSecret)
+				.Create();
 		}
 	}
 }

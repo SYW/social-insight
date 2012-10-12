@@ -28,6 +28,11 @@ namespace Platform.Client.Common
 		{
 			var parameterType = parameter.Value.GetType();
 
+			if (parameterType == typeof(DateTime))
+			{
+				return ((DateTime)parameter.Value).ToString("yyyy-MM-ddTHH:mm:ss");
+			}
+
 			if (parameterType.IsValueType || parameterType == typeof(string))
 			{
 				return parameter.Value.ToString();
