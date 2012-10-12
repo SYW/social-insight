@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Platform.Client.Common.Context;
 using SocialInsight.Domain.Catalogs;
 using SocialInsight.Domain.Context;
 using SocialInsight.Domain.Products;
-using SocialInsight.Domain.Users;
 
 namespace SocialInsight.Domain.Dashboard
 {
@@ -16,74 +14,36 @@ namespace SocialInsight.Domain.Dashboard
 
 	public class DashboardFlow : IDashboardFlow
 	{
-		private readonly IUsersApi _usersApi;
 		private readonly IUserContextProvider _userContextProvider;
-		private readonly ICatalogsApi _catalogsApi;
-		private readonly ICatalogsRepository _catalogsRepository;
-		private readonly ICreateCatalogFlow _createCatalogFlow;
 		private readonly IProductsApi _productsApi;
+		private readonly IProductsRepository _productsRepository;
+		private readonly IUserCatalogProvider _userCatalogProvider;
 
 		public DashboardFlow(IContextProvider contextProvider,
 			IStateProvider stateProvider)
 		{
-			_usersApi = new UsersApi(contextProvider);
 			_userContextProvider = new UserContextProvider(stateProvider, contextProvider);
-			_catalogsApi = new CatalogsApi(contextProvider);
-			_catalogsRepository = new CatalogsRepository();
-			_createCatalogFlow = new CreateCatalogFlow(contextProvider, stateProvider);
 			_productsApi = new ProductsApi(contextProvider);
+			_productsRepository = new ProductsRepository();
+			_userCatalogProvider = new UserCatalogProvider(contextProvider, stateProvider);
 		}
 
 		public IList<ScoredProduct> GetScoredProducts()
 		{
 			var userId = _userContextProvider.GetUserId();
-			var scoredProducts = GetProductsToScore(userId).Select(x => new ScoredProduct { Product = x, Score = 0 }).ToArray();
-			if (!scoredProducts.Any())
+			var userCatalog = _userCatalogProvider.Get(userId);
+			if (userCatalog == null)
 				return new ScoredProduct[0];
 
-			var productsCount = CountFriendsProducts(userId);
-			if (!productsCount.Any())
-				return scoredProducts;
+			var scoredProducts = _productsRepository.GetProductInsightForUser(userId).ToDictionary(x => x.ProductId);
+			var products = _productsApi
+				.Get(userCatalog.Items.Select(x => x.Id).ToArray());
 
-			foreach (var product in scoredProducts.Where(product => productsCount.ContainsKey(product.Product.Id)))
-			{
-				product.Score = productsCount[product.Product.Id];
-			}
-
-			return scoredProducts;
-		}
-
-		private IDictionary<long, int> CountFriendsProducts(long userId)
-		{
-			var friends = _usersApi.GetFriends(userId);
-			if (!friends.Any())
-				return new Dictionary<long, int>();
-
-			var usersCatalogs = _catalogsApi.GetUsersCatalogs(friends);
-			var items = usersCatalogs.SelectMany(x => x.Items).Select(x => x.Id);
-
-			return items
-				.GroupBy(x => x, (x, y) => new { Id = x, Count = y.Count() })
-				.ToDictionary(x => x.Id, y => y.Count);			
-		}
-
-		private IList<ProductDto> GetProductsToScore(long userId)
-		{
-			var userCatalogId = _catalogsRepository.GetUserCatalog(userId);
-			if (!userCatalogId.HasValue)
-				throw new InvalidOperationException("Social Insight catalog was not created for user #" + userId);
-
-			var userCatalog = _catalogsApi.Get(new[] { userCatalogId.Value }).FirstOrDefault();
-			if (userCatalog == null)
-			{
-				_createCatalogFlow.Create();
-				return new ProductDto[0];
-			}
-
-			if (!userCatalog.Items.Any())
-				return new ProductDto[0];
-
-			return _productsApi.Get(userCatalog.Items.Select(x => x.Id).ToArray());			
+			return products.Select(x => new ScoredProduct
+				{
+					Product = x,
+					Score = scoredProducts.ContainsKey(x.Id) ? scoredProducts[x.Id].Score : 0
+				}).ToArray();
 		}
 	}
 

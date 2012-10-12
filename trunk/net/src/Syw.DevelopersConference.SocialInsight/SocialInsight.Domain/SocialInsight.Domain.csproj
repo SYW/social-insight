@@ -82,6 +82,7 @@
     <Compile Include="Catalogs\CreateCatalogFlow.cs" />
     <Compile Include="Catalogs\UserCatalogDto.cs" />
     <Compile Include="Catalogs\UserCatalogDtoMap.cs" />
+    <Compile Include="Catalogs\UserCatalogProvider.cs" />
     <Compile Include="Configuration\ApplicationSettings.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\PlatformSettings.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Products\ProductInsightDto.cs" />
     <Compile Include="Products\ProductInsightDtoMap.cs" />
     <Compile Include="Products\ProductsApi.cs" />
+    <Compile Include="Products\ProductScoreCalculator.cs" />
     <Compile Include="Products\ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes.cs" />

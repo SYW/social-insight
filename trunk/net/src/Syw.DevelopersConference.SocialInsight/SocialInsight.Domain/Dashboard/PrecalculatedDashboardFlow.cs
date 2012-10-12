@@ -15,7 +15,7 @@ namespace SocialInsight.Domain.Dashboard
 
 	public class PrecalculatedDashboardFlow : IPrecalculatedDashboardFlow
 	{
-		private readonly IDashboardFlow _dashboardFlow;
+		private readonly IProductScoreCalculator _productScoreCalculator;
 		private readonly IOfflineTokenProvider _offlineTokenProvider;
 		private readonly ICatalogsRepository _catalogsRepository;
 		private readonly IProductsRepository _productsRepository;
@@ -24,7 +24,7 @@ namespace SocialInsight.Domain.Dashboard
 		public PrecalculatedDashboardFlow(IContextProvider contextProvider, 
 			IStateProvider stateProvider)
 		{
-			_dashboardFlow = new DashboardFlow(contextProvider, stateProvider);
+			_productScoreCalculator = new ProductScoreCalculator(contextProvider, stateProvider);
 			_offlineTokenProvider = new OfflineTokenProvider(contextProvider);
 			_platformTokenProvider = new PlatformTokenProvider(contextProvider);
 			_catalogsRepository = new CatalogsRepository();
@@ -43,11 +43,11 @@ namespace SocialInsight.Domain.Dashboard
 		{
 			SetToken(userCatalog.UserId);
 
-			var scoredProducts = _dashboardFlow.GetScoredProducts();
+			var scoredProducts = _productScoreCalculator.CalculateForUser(userCatalog.UserId);
 
 			var productsInsight =
 				scoredProducts.Where(x => x.Score > 0).Select(
-					x => new ProductInsightDto {ProductId = x.Product.Id, UserId = userCatalog.UserId, Score = x.Score})
+					x => new ProductInsightDto {ProductId = x.ProductId, UserId = userCatalog.UserId, Score = x.Score})
 				.ToArray();
 
 			_productsRepository.SaveProductInsights(productsInsight);
