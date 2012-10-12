@@ -13,17 +13,17 @@ namespace SocialInsight.Domain.Context
 		private const string UserIdKey = "user-id";
 
 		private readonly IUsersApi _usersApi;
-		private readonly CookieContextProvider _contextProvider;
+		private readonly CookieStateProvider _stateProvider;
 
 		public UserContextProvider()
 		{
 			_usersApi = new UsersApi();
-			_contextProvider = new CookieContextProvider();
+			_stateProvider = new CookieStateProvider();
 		}
 
 		public long GetUserId()
 		{
-			var userId = _contextProvider.Get(UserIdKey);
+			var userId = _stateProvider.Get(UserIdKey);
 
 			long id;
 
@@ -31,7 +31,7 @@ namespace SocialInsight.Domain.Context
 				return id;
 
 			id = _usersApi.GetCurrentUser().Id;
-			_contextProvider.Set(UserIdKey, id.ToString());
+			_stateProvider.Set(UserIdKey, id.ToString());
 
 			return id;
 		}
