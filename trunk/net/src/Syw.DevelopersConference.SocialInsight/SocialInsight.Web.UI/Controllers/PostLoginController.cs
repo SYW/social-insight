@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Platform.Client.Common.Context;
 using SocialInsight.Domain;
 using SocialInsight.Domain.AppLinks;
 using SocialInsight.Domain.Catalogs;
@@ -18,8 +19,9 @@ namespace SocialInsight.Web.UI.Controllers
 	    public PostLoginController()
 	    {
 		    _routes = new Routes();
-			_usersApi = new UsersApi();
-		    _createCatalogFlow = new CreateCatalogFlow();
+		    var contextProvider = new HttpContextProvider();
+		    _usersApi = new UsersApi(contextProvider);
+		    _createCatalogFlow = new CreateCatalogFlow(contextProvider, new CookieStateProvider());
 		    _applicationSettings = new ApplicationSettings();
 		    _appLinksApi = new AppLinksApi();
 	    }
@@ -38,7 +40,6 @@ namespace SocialInsight.Web.UI.Controllers
 
             return View("~/Views/PostLogin.cshtml", model);
         }
-
     }
 
 	public class PostLoginModel

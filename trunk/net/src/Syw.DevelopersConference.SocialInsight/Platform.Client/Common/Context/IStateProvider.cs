@@ -26,7 +26,7 @@ namespace Platform.Client.Common.Context
 		}
 	}
 
-	public class StaticStateProvider : IStateProvider
+	public class ThreadStateProvider : IStateProvider
 	{
 		private static readonly object Latch = new object();
 		[ThreadStatic]
@@ -52,7 +52,7 @@ namespace Platform.Client.Common.Context
 
 		public string Get(string name)
 		{
-			return Store[name];
+			return Store.ContainsKey(name) ? Store[name] : null;
 		}
 
 		public void Set(string name, string value)

@@ -17,7 +17,7 @@ namespace SocialInsight.Domain.Catalogs
 
 	public class CatalogsApi : ApiBase, ICatalogsApi
 	{
-		public CatalogsApi() : base(new HttpContextProvider())
+		public CatalogsApi(IContextProvider contextProvider) : base(contextProvider)
 		{
 		}
 

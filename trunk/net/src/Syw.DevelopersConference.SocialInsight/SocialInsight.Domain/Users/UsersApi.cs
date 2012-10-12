@@ -14,13 +14,13 @@ namespace SocialInsight.Domain.Users
 	{
 		private const string CurrentUserCacheKey = "users:current";
 
-		private readonly HttpContextProvider _context;		
+		private readonly IContextProvider _context;		
 
 		protected override string BasePath { get { return "users"; } }
 
-		public UsersApi() : base(new HttpContextProvider())
+		public UsersApi(IContextProvider contextProvider) : base(contextProvider)
 		{
-			_context = new HttpContextProvider();			
+			_context = contextProvider;			
 		}
 
 		public UserDto GetCurrentUser()

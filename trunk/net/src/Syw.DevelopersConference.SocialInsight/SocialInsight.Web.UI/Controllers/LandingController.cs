@@ -9,14 +9,15 @@ namespace SocialInsight.Web.UI.Controllers
     public class LandingController : Controller
     {
 	    private readonly Routes _routes;
-	    private readonly AuthApi _authApi;
+	    private readonly IAuthApi _authApi;
 		private readonly IUsersApi _usersApi;
 
 	    public LandingController()
 	    {
 		    _routes = new Routes();
-		    _authApi = new AuthApi(new HttpContextProvider());
-		    _usersApi = new UsersApi();
+		    var contextProvider = new HttpContextProvider();
+		    _authApi = new AuthApi(contextProvider);
+		    _usersApi = new UsersApi(contextProvider);
 	    }
 
 	    public ActionResult Index()

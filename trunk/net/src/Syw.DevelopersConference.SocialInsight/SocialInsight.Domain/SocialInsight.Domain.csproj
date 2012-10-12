@@ -87,6 +87,7 @@
     <Compile Include="Configuration\PlatformSettings.cs" />
     <Compile Include="Context\UserContextProvider.cs" />
     <Compile Include="Dashboard\DashboardFlow.cs" />
+    <Compile Include="Dashboard\PrecalculatedDashboardFlow.cs" />
     <Compile Include="DataAccess\SessionProvider.cs" />
     <Compile Include="Privacy.cs" />
     <Compile Include="Products\ProductDto.cs" />

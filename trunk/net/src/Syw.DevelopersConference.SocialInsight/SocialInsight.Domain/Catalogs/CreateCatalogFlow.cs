@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Platform.Client.Common.Context;
 using Platform.Client.Common.WebClient;
 using SocialInsight.Domain.Context;
 
@@ -17,10 +18,11 @@ namespace SocialInsight.Domain.Catalogs
 		private readonly IUserContextProvider _userContextProvider;
 		private readonly CatalogsApi _catalogsApi;
 
-		public CreateCatalogFlow()
+		public CreateCatalogFlow(IContextProvider contextProvider,
+			IStateProvider stateProvider)
 		{
-			_catalogsApi = new CatalogsApi();
-			_userContextProvider = new UserContextProvider();
+			_catalogsApi = new CatalogsApi(contextProvider);
+			_userContextProvider = new UserContextProvider(stateProvider, contextProvider);
 			_catalogsRepository = new CatalogsRepository();
 		}
 

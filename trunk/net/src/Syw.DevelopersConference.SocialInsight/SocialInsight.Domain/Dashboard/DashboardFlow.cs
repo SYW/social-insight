@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using Platform.Client.Common.Context;
 using SocialInsight.Domain.Catalogs;
 using SocialInsight.Domain.Context;
 using SocialInsight.Domain.Products;
@@ -23,14 +23,15 @@ namespace SocialInsight.Domain.Dashboard
 		private readonly ICreateCatalogFlow _createCatalogFlow;
 		private readonly IProductsApi _productsApi;
 
-		public DashboardFlow()
+		public DashboardFlow(IContextProvider contextProvider,
+			IStateProvider stateProvider)
 		{
-			_usersApi = new UsersApi();
-			_userContextProvider = new UserContextProvider();
-			_catalogsApi = new CatalogsApi();
+			_usersApi = new UsersApi(contextProvider);
+			_userContextProvider = new UserContextProvider(stateProvider, contextProvider);
+			_catalogsApi = new CatalogsApi(contextProvider);
 			_catalogsRepository = new CatalogsRepository();
-			_createCatalogFlow = new CreateCatalogFlow();
-			_productsApi = new ProductsApi();
+			_createCatalogFlow = new CreateCatalogFlow(contextProvider, stateProvider);
+			_productsApi = new ProductsApi(contextProvider);
 		}
 
 		public IList<ScoredProduct> GetScoredProducts()

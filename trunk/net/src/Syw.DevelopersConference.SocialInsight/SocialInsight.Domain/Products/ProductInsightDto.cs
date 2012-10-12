@@ -4,7 +4,7 @@
 	{
 		public long UserId { get; set; }
 		public long ProductId { get; set; }
-		public int Score { get; set; }
+		public decimal Score { get; set; }
 
 		protected bool Equals(ProductInsightDto other)
 		{

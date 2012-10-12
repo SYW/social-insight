@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SocialInsight.Domain.DataAccess;
 
 namespace SocialInsight.Domain.Catalogs
@@ -7,6 +8,7 @@ namespace SocialInsight.Domain.Catalogs
 	{
 		void AddUserCatalog(long userId, long catalogId);
 		long? GetUserCatalog(long userId);
+		IList<UserCatalogDto> GetAllUserCatalogs();
 	}
 
 	public class CatalogsRepository : ICatalogsRepository
@@ -32,5 +34,9 @@ namespace SocialInsight.Domain.Catalogs
 				userCatalog.CatalogId;
 		}
 
+		public IList<UserCatalogDto> GetAllUserCatalogs()
+		{
+			return _sessionProvider.Query<UserCatalogDto>(q => q);
+		}
 	}
 }

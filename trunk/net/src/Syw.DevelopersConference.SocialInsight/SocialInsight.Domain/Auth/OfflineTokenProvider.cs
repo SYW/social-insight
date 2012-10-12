@@ -6,7 +6,12 @@ using SocialInsight.Domain.Configuration;
 
 namespace SocialInsight.Domain.Auth
 {
-	public class OfflineTokenProvider
+	public interface IOfflineTokenProvider
+	{
+		string Get(long userId);
+	}
+
+	public class OfflineTokenProvider : IOfflineTokenProvider
 	{
 		private readonly IApplicationSettings _applicationSettings;
 		private readonly IAuthApi _authApi;

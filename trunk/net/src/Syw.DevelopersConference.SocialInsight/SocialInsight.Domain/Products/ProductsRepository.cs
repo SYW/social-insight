@@ -26,7 +26,13 @@ namespace SocialInsight.Domain.Products
 
 		public void SaveProductInsights(IList<ProductInsightDto> insights)
 		{
-			_sessionProvider.WithSession(s => s.SaveOrUpdate(insights));
+			_sessionProvider.WithSession(s =>
+				{
+					foreach (var insight in insights)
+					{
+						s.SaveOrUpdate(insight);
+					}
+				});
 		}
 	}
 }

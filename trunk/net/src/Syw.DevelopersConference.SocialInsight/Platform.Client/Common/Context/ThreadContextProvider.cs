@@ -29,7 +29,7 @@ namespace Platform.Client.Common.Context
 
 		public T Get<T>(string key)
 		{
-			return (T) Store[key];
+			return Store.ContainsKey(key) ? (T)Store[key] : default(T);
 		}
 
 		public void Set<T>(string key, T value)

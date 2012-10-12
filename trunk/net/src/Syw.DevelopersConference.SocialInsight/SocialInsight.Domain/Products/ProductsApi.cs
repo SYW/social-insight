@@ -10,7 +10,7 @@ namespace SocialInsight.Domain.Products
 
 	public class ProductsApi : ApiBase, IProductsApi
 	{
-		public ProductsApi() : base(new HttpContextProvider())
+		public ProductsApi(IContextProvider contextProvider) : base(contextProvider)
 		{
 		}
 

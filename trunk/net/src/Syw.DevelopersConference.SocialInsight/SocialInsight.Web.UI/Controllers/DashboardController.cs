@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Platform.Client.Common.Context;
 using SocialInsight.Domain.Dashboard;
 
 namespace SocialInsight.Web.UI.Controllers
@@ -11,7 +12,8 @@ namespace SocialInsight.Web.UI.Controllers
 
 		public DashboardController()
 		{
-			_dashboardFlow = new DashboardFlow();
+			_dashboardFlow = new DashboardFlow(new HttpContextProvider(), 
+				new CookieStateProvider());
 		}
 
 		public ActionResult Index()
