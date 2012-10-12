@@ -93,6 +93,7 @@
     <Compile Include="Products\ProductInsightDto.cs" />
     <Compile Include="Products\ProductInsightDtoMap.cs" />
     <Compile Include="Products\ProductsApi.cs" />
+    <Compile Include="Products\ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Users\UserDto.cs" />

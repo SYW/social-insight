@@ -4,7 +4,13 @@ using SocialInsight.Domain.DataAccess;
 
 namespace SocialInsight.Domain.Products
 {
-	public class ProductsRepository
+	public interface IProductsRepository
+	{
+		IList<ProductInsightDto> GetProductInsightForUser(long userId);
+		void SaveProductInsights(IList<ProductInsightDto> insights);
+	}
+
+	public class ProductsRepository : IProductsRepository
 	{
 		private readonly SessionProvider _sessionProvider;
 
