@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Platform.Client.Common.Context;
+using Platform.Client.Configuration;
+using SocialInsight.Domain.Configuration;
 using SocialInsight.Domain.Dashboard;
 
 namespace SocialInsight.Web.UI.Controllers
@@ -9,11 +12,14 @@ namespace SocialInsight.Web.UI.Controllers
 	public class DashboardController : Controller
 	{
 		private readonly IDashboardFlow _dashboardFlow;
+		private readonly IPlatformSettings _platformSettings;
 
 		public DashboardController()
 		{
 			_dashboardFlow = new DashboardFlow(new HttpContextProvider(), 
 				new CookieStateProvider());
+
+			_platformSettings = new PlatformSettings();
 		}
 
 		public ActionResult Index()
@@ -31,9 +37,14 @@ namespace SocialInsight.Web.UI.Controllers
 					Id = scoredProduct.Product.Id,
 					Name = scoredProduct.Product.Name,
 					ImageUrl = scoredProduct.Product.ImageUrl,
-					ProductUrl = scoredProduct.Product.ProductUrl,
+					ProductUrl = GetProductUrl(scoredProduct),
 					Score = scoredProduct.Score
 				};
+		}
+
+		private Uri GetProductUrl(ScoredProduct scoredProduct)
+		{
+			return string.IsNullOrEmpty(scoredProduct.Product.ProductUrl) ? null : new Uri(_platformSettings.SywWebSiteUrl, scoredProduct.Product.ProductUrl);
 		}
 	}
 
@@ -47,7 +58,7 @@ namespace SocialInsight.Web.UI.Controllers
 		public long Id { get; set; }
 		public string Name { get; set; }
 		public string ImageUrl { get; set; }
-		public string ProductUrl { get; set; }
+		public Uri ProductUrl { get; set; }
 		public decimal Score { get; set; }
 	}
 }

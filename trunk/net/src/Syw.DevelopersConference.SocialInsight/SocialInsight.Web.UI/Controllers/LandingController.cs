@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Platform.Client.Common.Context;
 using SocialInsight.Domain;
 using SocialInsight.Domain.Auth;
@@ -46,7 +47,7 @@ namespace SocialInsight.Web.UI.Controllers
 		public string AppLoginUrl { get; set; }
 		public bool IsUserLoggedIn { get; set; }
 		public bool UserAlreadyInstalledApp { get; set; }
-		public string DashboardUrl { get; set; }
+		public Uri DashboardUrl { get; set; }
 		public string UserName { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Platform.Client.Common.Context;
 using SocialInsight.Domain;
 using SocialInsight.Domain.AppLinks;
@@ -45,6 +46,6 @@ namespace SocialInsight.Web.UI.Controllers
 	public class PostLoginModel
 	{
 		public string UserName { get; set; }
-		public string DashboardUrl { get; set; }
+		public Uri DashboardUrl { get; set; }
 	}
 }

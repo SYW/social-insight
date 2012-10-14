@@ -11,10 +11,11 @@
 	{
 	    foreach(var product in Model.Products)
 	    {
-		    <div class="scored-product">
+		    <div class="scored-product" data-product-id="@product.Id">
 			    <a href="@product.ProductUrl" class="product-image" target="_top"><img alt="@product.Name" src="@product.ImageUrl"/></a>
 			    <a href="@product.ProductUrl" class="product-name" target="_top">@product.Name</a>
-			    <div class="product-score">Score: <span>@product.Score</span></div>
+				<div class="product-score">Score: <span>@product.Score</span></div>
+                <a class="ask link">Ask your friends a question about this product</a>
 		    </div>
 	    }	
 	}
@@ -23,5 +24,14 @@
 		<div class="no-products">There are no products to get insight about. To start getting insight about products you want, add products to the <span class="app-name">Social Insight</span> catalog</div>
 	}
 </div> 
+
+<div class="question-dialog" title="Ask a question">
+	<span>What do you want to ask about the product?</span>
+	<input class="question" type="text"/>
+</div>
+
+<div class="question-error-dialog" title="Can not ask question">
+	<span>Can not ask question. Please try again later</span>
+</div>
 
 <script type="text/javascript" src="@Url.Content("~/static/js/dashboard.js")"></script>

@@ -1,1 +1,6 @@
-﻿
+﻿.link { text-decoration: none;cursor: pointer;color: #CF5E00; }
+.link:hover { text-decoration: underline}
+
+.question-dialog { display: none;width: 267px;height: 100px; text-align: center }
+.question-dialog input { width: 267px;display: block; }
+.question-error-dialog { display: none;width: 267px;text-align: center}

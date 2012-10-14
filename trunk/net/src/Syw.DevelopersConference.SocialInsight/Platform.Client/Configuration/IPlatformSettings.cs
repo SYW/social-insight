@@ -4,7 +4,7 @@ namespace Platform.Client.Configuration
 {
 	public interface IPlatformSettings
 	{
-		string SywWebSiteUrl { get; }
+		Uri SywWebSiteUrl { get; }
 		string SywAppLoginUrl { get; }
 		Uri ApiUrl { get; }
 		Uri SecureApiUrl { get;  }

@@ -101,6 +101,8 @@
     <Compile Include="Routes.cs" />
     <Compile Include="Users\UserDto.cs" />
     <Compile Include="Users\UsersApi.cs" />
+    <Compile Include="Wall\QuestionFlow.cs" />
+    <Compile Include="Wall\WallApi.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
