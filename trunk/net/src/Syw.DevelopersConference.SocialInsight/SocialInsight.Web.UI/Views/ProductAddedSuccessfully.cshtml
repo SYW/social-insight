@@ -1,0 +1,21 @@
+﻿@model SocialInsight.Web.UI.Controllers.ProductActionModel
+
+@{
+    ViewBag.Title = "ProductAddedSuccessfully";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="product-action">
+	@if (Model.HasProductBeenAdded)
+	{
+	    <div class="message">Product was added successfully. Check back in a while to see the Social Insight about this product.</div>	
+	}
+    else
+	{
+		<div class="message">Product is already in social insight <a href ="@Model.DashboardUrl">Dashboard</a></div>	
+	}
+	
+	<div class="link close">Close</div>	
+</div>
+
+<script type="text/javascript" src="@Url.Content("~/static/js/product-action.js")"></script>

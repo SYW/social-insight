@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
@@ -152,6 +153,7 @@
     <Content Include="static\js\jquery.validate.js" />
     <Content Include="static\js\jquery.validate.min.js" />
     <Content Include="static\js\modernizr-2.5.3.js" />
+    <Content Include="static\js\product-action.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -179,6 +181,7 @@
     <Content Include="Views\Landing.cshtml" />
     <Content Include="Views\Login.cshtml" />
     <Content Include="Views\PostLogin.cshtml" />
+    <Content Include="Views\ProductAddedSuccessfully.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

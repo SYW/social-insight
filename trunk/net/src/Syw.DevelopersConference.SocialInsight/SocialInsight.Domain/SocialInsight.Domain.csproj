@@ -72,11 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBase.cs" />
+    <Compile Include="AppActions\AppActionsApi.cs" />
     <Compile Include="AppLinks\AppLinksApi.cs" />
     <Compile Include="Auth\AuthApi.cs" />
     <Compile Include="Auth\OfflineTokenProvider.cs" />
     <Compile Include="Auth\UserState.cs" />
     <Compile Include="Catalogs\CatalogDto.cs" />
+    <Compile Include="Catalogs\CatalogItemsApi.cs" />
     <Compile Include="Catalogs\CatalogsApi.cs" />
     <Compile Include="Catalogs\CatalogsRepository.cs" />
     <Compile Include="Catalogs\CreateCatalogFlow.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Dashboard\PrecalculatedDashboardFlow.cs" />
     <Compile Include="DataAccess\SessionProvider.cs" />
     <Compile Include="Privacy.cs" />
+    <Compile Include="Products\AddProductToCatalogFlow.cs" />
     <Compile Include="Products\ProductDto.cs" />
     <Compile Include="Products\ProductInsightDto.cs" />
     <Compile Include="Products\ProductInsightDtoMap.cs" />
