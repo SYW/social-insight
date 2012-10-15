@@ -1,5 +1,8 @@
 ﻿$(window).load(function () {
     var actualHeight = $(document).height();
+    // Setting the dashboard height since the scored products are now floating
+    $('.dashboard').height(actualHeight);
+    
     Platform.Canvas.setHeight(actualHeight);
 });
 

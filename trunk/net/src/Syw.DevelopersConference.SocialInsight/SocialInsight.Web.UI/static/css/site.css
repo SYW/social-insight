@@ -1,6 +1,32 @@
-﻿.link { text-decoration: none;cursor: pointer;color: #CF5E00; }
-.link:hover { text-decoration: underline}
+﻿h2 { margin: 0}
+
+.link { color: #CF5E00;text-decoration: none; cursor: pointer; }
+a:hover { text-decoration: underline }
+a.link:hover { text-decoration: underline}
 
 .question-dialog { display: none;width: 267px;height: 100px; text-align: center }
 .question-dialog input { width: 267px;display: block; }
 .question-error-dialog { display: none;width: 267px;text-align: center}
+
+#title { background-image: url('/static/images/title-background.png');background-repeat: repeat-x;background-position: 0 -8px; background-color: #E9E7E3}
+#title img { margin-left: 10px;margin-top:1px }
+#main { background: #E9E7E3;font-family: Trebuchet MS; padding:10px }
+
+.dashboard { font-size: 12px; }
+.dashboard a { text-decoration: none }
+.dashboard a:hover { text-decoration: underline }
+.scored-product { width: 200px;height: 310px;background: white;border: 1px solid #AEA59C;margin: 10px 13px;float: left; }
+.scored-product .product-details { padding: 5px; height:270px }
+.scored-product .product-details .product-image { width: 180px;height: 180px; margin: 0px 5px}
+.scored-product .product-details .product-image img { width: 180px;height: 180px; }
+.scored-product .product-details .product-name { color: #6B6B6B; display: block }
+.scored-product .product-details .price { color: #94B62D; margin-top: 5px; display: block; font-size: 14px }
+
+.scored-product .actions { height: 23px;border-top: 1px solid #CCCBCA;background: #F5F4F4;padding: 3px 5px; }
+.scored-product .actions .product-score { font-size: 18px;font-weight: bold;color: black; float: left}
+.scored-product .actions .product-score span { color:#6b6b6b }
+.scored-product .actions .ask { display: block;float: right;font-size: 14px;font-weight: bold;margin-top: 4px }
+
+.product-action .message { float: left}
+.product-action .close { float: right}
+.product-action {height: 300px}

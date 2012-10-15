@@ -4,19 +4,23 @@
     ViewBag.Title = "Dashboard";
 }
 
-<h2>Dashboard</h2>
-
 <div class="dashboard">
 	@if (Model.Products.Any())
 	{
 	    foreach(var product in Model.Products)
 	    {
-		    <div class="scored-product" data-product-id="@product.Id">
-			    <a href="@product.ProductUrl" class="product-image" target="_top"><img alt="@product.Name" src="@product.ImageUrl"/></a>
-			    <a href="@product.ProductUrl" class="product-name" target="_top">@product.Name</a>
-				<div class="product-score">Score: <span>@product.Score</span></div>
-                <a class="ask link">Ask your friends a question about this product</a>
-		    </div>
+			<div class="scored-product" data-product-id="@product.Id">
+				<div class="product-details">
+				    <a href="@product.ProductUrl" class="product-image" target="_top"><img alt="@product.Name" src="@product.ImageUrl"/></a>
+					<a href="@product.ProductUrl" class="product-name" target="_top">@product.Name</a>	
+                    <span class="price">$@string.Format("{0:0.00}", product.Price)</span>
+				</div>
+				
+				<div class="actions">
+					<div class="product-score" title="The social insight score of this product"><img alt="Score icon" src="@Url.Content("~/static/images/star.png")"  /> Social Meter: <span>@String.Format("{0:0}", product.Score)</span></div>
+                    <a class="ask link" title="Ask your friends a question about this product">Ask</a>
+				</div>
+			</div>
 	    }	
 	}
     else

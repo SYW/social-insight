@@ -142,6 +142,9 @@
     <Content Include="static\css\jquery.ui.dialog.css" />
     <Content Include="static\css\jquery.ui.theme.css" />
     <Content Include="static\css\site.css" />
+    <Content Include="static\images\socialInsight_logo.png" />
+    <Content Include="static\images\star.png" />
+    <Content Include="static\images\title-background.png" />
     <Content Include="static\images\ui-icons_222222_256x240.png" />
     <Content Include="static\images\ui-icons_454545_256x240.png" />
     <Content Include="static\js\dashboard.js" />
