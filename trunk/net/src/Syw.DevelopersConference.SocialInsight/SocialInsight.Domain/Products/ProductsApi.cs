@@ -10,7 +10,8 @@ namespace SocialInsight.Domain.Products
 
 	public class ProductsApi : ApiBase, IProductsApi
 	{
-		public ProductsApi(IContextProvider contextProvider) : base(contextProvider)
+		public ProductsApi(IContextProvider contextProvider)
+			: base(contextProvider)
 		{
 		}
 
@@ -18,7 +19,7 @@ namespace SocialInsight.Domain.Products
 
 		public IList<ProductDto> Get(IList<long> ids)
 		{
-			return Proxy.Get<ProductDto[]>(GetEndpointPath("get"), new KeyValuePair<string, object>("ids", ids));
+			return Call<ProductDto[]>("get", new { Ids = ids });
 		}
 	}
 }

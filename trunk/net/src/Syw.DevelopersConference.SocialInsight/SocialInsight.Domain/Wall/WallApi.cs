@@ -12,17 +12,20 @@ namespace SocialInsight.Domain.Wall
 	{
 		protected override string BasePath { get { return "wall"; } }
 
-		public WallApi(IContextProvider contextProvider) : base(contextProvider)
-		{}
+		public WallApi(IContextProvider contextProvider)
+			: base(contextProvider)
+		{ }
 
 		public void PublishUserAction(string action, string title, string content, string imageUrl, string targetUrl)
 		{
-			Call<string>("publish-user-action",
-			             new KeyValuePair<string, object>("userAction", action),
-			             new KeyValuePair<string, object>("title", title),
-			             new KeyValuePair<string, object>("content", content),
-			             new KeyValuePair<string, object>("imageUrl", imageUrl),
-			             new KeyValuePair<string, object>("targetUrl", targetUrl));
+			Call<string>("publish-user-action", new
+			{
+				UserAction = action,
+				Title = title,
+				Content = content,
+				ImageUrl = imageUrl,
+				TargetUrl = targetUrl
+			});
 		}
 	}
 }

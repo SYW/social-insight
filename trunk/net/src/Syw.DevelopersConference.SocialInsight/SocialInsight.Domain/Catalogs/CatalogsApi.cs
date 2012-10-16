@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 using Platform.Client.Common.Context;
 
 namespace SocialInsight.Domain.Catalogs
@@ -17,7 +13,8 @@ namespace SocialInsight.Domain.Catalogs
 
 	public class CatalogsApi : ApiBase, ICatalogsApi
 	{
-		public CatalogsApi(IContextProvider contextProvider) : base(contextProvider)
+		public CatalogsApi(IContextProvider contextProvider)
+			: base(contextProvider)
 		{
 		}
 
@@ -25,21 +22,23 @@ namespace SocialInsight.Domain.Catalogs
 
 		public long Create(string catalogName, string description, Privacy privacy)
 		{
-			return Call<long>("create",
-								new KeyValuePair<string, object>("name", catalogName),
-								new KeyValuePair<string, object>("description", description),
-								new KeyValuePair<string, object>("privacy", privacy));
+			return Call<long>("create", new
+			{
+				Name = catalogName,
+				Description = description,
+				Privacy = privacy
+			});
 		}
 
 		public IList<CatalogDto> Get(IList<long> ids)
 		{
-			return Call<IList<CatalogDto>>("get", new KeyValuePair<string, object>("ids", ids));
+			return Call<IList<CatalogDto>>("get", new { Ids = ids });
 		}
 
 		public IList<CatalogDto> GetUsersCatalogs(IList<long> userIds)
 		{
 			var userCatalogIds = userIds
-					.SelectMany(x => Call<IList<long>>("get-user-catalogs", new KeyValuePair<string, object>("userId", x)))
+					.SelectMany(x => Call<IList<long>>("get-user-catalogs", new { UserId = x }))
 					.Distinct().ToArray();
 
 			return Get(userCatalogIds);

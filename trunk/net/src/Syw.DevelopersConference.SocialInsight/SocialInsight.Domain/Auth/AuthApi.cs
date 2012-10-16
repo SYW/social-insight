@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Platform.Client.Common.Context;
 
 namespace SocialInsight.Domain.Auth
@@ -12,7 +11,8 @@ namespace SocialInsight.Domain.Auth
 
 	public class AuthApi : ApiBase, IAuthApi
 	{
-		public AuthApi(IContextProvider contextProvider) : base(contextProvider)
+		public AuthApi(IContextProvider contextProvider)
+			: base(contextProvider)
 		{
 		}
 
@@ -25,18 +25,19 @@ namespace SocialInsight.Domain.Auth
 
 		public string GetOfflineToken(long userId, long appId, DateTime timestamp, string signature)
 		{
-			return Proxy.SecuredGetWithoutContext<string>(GetEndpointPath("get-token"),
-			                                              new KeyValuePair<string, object>("userId", userId),
-			                                              new KeyValuePair<string, object>("appId", appId),
-														  // Timestamp is only valid without miliseconds. see documantation
-			                                              new KeyValuePair<string, object>("timestamp",
-			                                                                               new DateTime(timestamp.Year,
-			                                                                                            timestamp.Month,
-			                                                                                            timestamp.Day,
-			                                                                                            timestamp.Hour,
-			                                                                                            timestamp.Minute,
-			                                                                                            timestamp.Second)),
-			                                              new KeyValuePair<string, object>("signature", signature));
+			return Proxy.SecuredAnonymousGet<string>(GetEndpointPath("get-token"),
+													 new
+													 {
+														 UserId = userId,
+														 AppId = appId,
+														 Timestamp = new DateTime(timestamp.Year,
+																				  timestamp.Month,
+																				  timestamp.Day,
+																				  timestamp.Hour,
+																				  timestamp.Minute,
+																				  timestamp.Second),
+														 Signature = signature
+													 });
 		}
 	}
 }

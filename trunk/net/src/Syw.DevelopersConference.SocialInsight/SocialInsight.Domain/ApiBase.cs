@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Platform.Client;
+﻿using Platform.Client;
 using Platform.Client.Common.Context;
 using SocialInsight.Domain.Configuration;
 
@@ -7,7 +6,7 @@ namespace SocialInsight.Domain
 {
 	public abstract class ApiBase
 	{
-		protected PlatformProxy Proxy { get; private set; }
+		protected IPlatformProxy Proxy { get; private set; }
 
 		protected abstract string BasePath { get; }
 
@@ -23,9 +22,9 @@ namespace SocialInsight.Domain
 			return string.Format("/{0}/{1}", BasePath, endpoint);
 		}
 
-		protected T Call<T>(string endpoint, params KeyValuePair<string, object>[] parameters)
+		protected T Call<T>(string endpoint, object parametersModel = null)
 		{
-			return Proxy.Get<T>(GetEndpointPath(endpoint), parameters);
+			return Proxy.Get<T>(GetEndpointPath(endpoint), parametersModel);
 		}
 	}
 }

@@ -14,13 +14,14 @@ namespace SocialInsight.Domain.Users
 	{
 		private const string CurrentUserCacheKey = "users:current";
 
-		private readonly IContextProvider _context;		
+		private readonly IContextProvider _context;
 
 		protected override string BasePath { get { return "users"; } }
 
-		public UsersApi(IContextProvider contextProvider) : base(contextProvider)
+		public UsersApi(IContextProvider contextProvider)
+			: base(contextProvider)
 		{
-			_context = contextProvider;			
+			_context = contextProvider;
 		}
 
 		public UserDto GetCurrentUser()
@@ -29,7 +30,7 @@ namespace SocialInsight.Domain.Users
 
 			if (user == null)
 			{
-				user = Proxy.Get<UserDto>(GetEndpointPath("current"));
+				user = Call<UserDto>("current");
 				_context.Set(CurrentUserCacheKey, user);
 			}
 
@@ -38,10 +39,10 @@ namespace SocialInsight.Domain.Users
 
 		public IList<long> GetFriends(long userId)
 		{
-			var userIdParameter = new KeyValuePair<string, object>("userId", userId);
+			var userIdParameter = new { UserId = userId };
 
-			var followers = Proxy.Get<long[]>(GetEndpointPath("followers"), userIdParameter);
-			var followedBy = Proxy.Get<long[]>(GetEndpointPath("followed-by"), userIdParameter);
+			var followers = Call<long[]>("followers", userIdParameter);
+			var followedBy = Call<long[]>("followed-by", userIdParameter);
 
 			return followers.Join(followedBy, x => x, y => y, (x, y) => x).ToList();
 		}

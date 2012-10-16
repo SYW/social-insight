@@ -12,15 +12,18 @@ namespace SocialInsight.Domain.Catalogs
 	{
 		protected override string BasePath { get { return "catalogs/items"; } }
 
-		public CatalogItemsApi(IContextProvider contextProvider) : base(contextProvider)
+		public CatalogItemsApi(IContextProvider contextProvider)
+			: base(contextProvider)
 		{
 		}
 
 		public void AddProductToCatalogs(IList<long> catalogIds, long productId)
 		{
-			Call<string>("add",
-			             new KeyValuePair<string, object>("catalogIds", catalogIds),
-			             new KeyValuePair<string, object>("itemId", productId));
+			Call<string>("add", new
+			{
+				CatalogIds = catalogIds,
+				ItemId = productId
+			});
 		}
 	}
 }

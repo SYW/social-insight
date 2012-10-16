@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
 using Platform.Client.Common;
@@ -11,44 +14,70 @@ using Platform.Client.Configuration;
 
 namespace Platform.Client
 {
-	public class PlatformProxy
+	public interface IPlatformProxy
 	{
+		T AnonymousGet<T>(string servicePath, object parametersModel = null);
+		T SecuredAnonymousGet<T>(string servicePath, object parametersModel = null);
+		T Get<T>(string servicePath, object parametersModel = null);
+	}
+
+	public class PlatformProxy : IPlatformProxy
+	{
+		public static ConcurrentDictionary<Type, IEnumerable<PropertyInfo>> ParametersModelCache = new ConcurrentDictionary<Type, IEnumerable<PropertyInfo>>();
+
 		private readonly IWebClientBuilder _webClientBuilder;
 		private readonly IPlatformSettings _platformSettings;
 		private readonly IPlatformTokenProvider _platformTokenProvider;
 		private readonly IPlatformHashProvider _platformHashProvider;
 		private readonly IParametersTranslator _parametersTranslator;
 
-		public PlatformProxy(IPlatformSettings platformSettings, 
+		public PlatformProxy(IPlatformSettings platformSettings,
 			IApplicationSettings applicationSettings,
 			IPlatformTokenProvider platformTokenProvider)
 		{
-			_platformSettings = platformSettings;			
+			_platformSettings = platformSettings;
 			_platformTokenProvider = platformTokenProvider;
-			
+
 			_parametersTranslator = new ParametersTranslator();
 			_webClientBuilder = new WebClientBuilder();
 			_platformHashProvider = new PlatformHashProvider(applicationSettings, platformTokenProvider);
 		}
 
-		public TR Get<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
+		public T AnonymousGet<T>(string servicePath, object parametersModel = null)
 		{
-			return Get<TR>(GetServiceUrl(servicePath), parameters, AddContextParameters);
+			return Get<T>(GetServiceUrl(servicePath), GetParameters(parametersModel), null);
 		}
 
-		public TR GetWithoutContext<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
-		{
-			return Get<TR>(GetServiceUrl(servicePath), parameters, null);
-		}
-
-		public TR SecuredGetWithoutContext<TR>(string servicePath, params KeyValuePair<string, object>[] parameters)
+		public T SecuredAnonymousGet<T>(string servicePath, object parametersModel = null)
 		{
 			var serviceUrl = GetSecureServiceUrl(servicePath);
 
-			return Get<TR>(serviceUrl, parameters, null);
+			return Get<T>(serviceUrl, GetParameters(parametersModel), null);
 		}
 
-		private TR Get<TR>(Uri serviceUrl, ICollection<KeyValuePair<string, object>> parameters, Action<NameValueCollection> applyExtraParameters)
+		public T Get<T>(string servicePath, object parametersModel = null)
+		{
+			return Get<T>(GetServiceUrl(servicePath), GetParameters(parametersModel), AddContextParameters);
+		}
+
+		private ICollection<KeyValuePair<string, object>> GetParameters(object parametersModel)
+		{
+			if (parametersModel == null)
+				return new KeyValuePair<string, object>[0];
+
+			var type = parametersModel.GetType();
+
+			if (!ParametersModelCache.ContainsKey(type))
+				ParametersModelCache.TryAdd(type, type.GetProperties(BindingFlags.Instance | BindingFlags.Public));
+
+			var modelPropertiesInfo = ParametersModelCache[type];
+
+			return modelPropertiesInfo
+				.Select(x => new KeyValuePair<string, object>(x.Name, x.GetValue(parametersModel, null)))
+				.ToArray();
+		}
+
+		private T Get<T>(Uri serviceUrl, ICollection<KeyValuePair<string, object>> parameters, Action<NameValueCollection> applyExtraParameters)
 		{
 			var webClient = _webClientBuilder.Create();
 
@@ -76,7 +105,7 @@ namespace Platform.Client
 
 			try
 			{
-				return webClient.GetJson<TR>(serviceUrl, serviceParameters);
+				return webClient.GetJson<T>(serviceUrl, serviceParameters);
 			}
 			catch (WebException ex)
 			{
@@ -104,7 +133,7 @@ namespace Platform.Client
 			using (var reader = new StreamReader(ex.Response.GetResponseStream(), Encoding.UTF8))
 			{
 				return reader.ReadToEnd();
-			}	
+			}
 		}
 
 		private void AddContextParameters(NameValueCollection serviceParameters)
